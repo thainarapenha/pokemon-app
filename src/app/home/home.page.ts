@@ -25,6 +25,7 @@ export class HomePage implements OnInit {
   getAllPokemons() {
     this.httpService.getAllPokemon().subscribe(async (response: any) => {
       const results = response.results;
+      console.log('results:', results)
 
       const promises = results.map((p: any) =>
         this.httpService.getPokemonName(p.name).toPromise()

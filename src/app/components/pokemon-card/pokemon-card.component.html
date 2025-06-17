@@ -5,8 +5,19 @@
       <div class="pokemon-id">{{ formattedId }}</div>
       <div class="pokemon-name">{{ name | titlecase }}</div>
       <div class="pokemon-types">
-        <ion-badge *ngFor="let type of types" [ngStyle]="{ 'background-color': mainTypeColor(type, 'dark') }">
+        
+        <ion-badge
+        *ngFor="let type of types"
+        class="type-badge"
+        [ngStyle]="{ 'background-color': mainTypeColor(type, 'dark')}"
+        >
+          <img
+            [src]="getTypeIconUrl(type)"
+            alt="{{ type }}"
+            class="type-icon"
+          />
           {{ type | titlecase }}
+          
         </ion-badge>
       </div>
     </div>
@@ -15,14 +26,14 @@
       class="pokemon-image-box"
       [ngStyle]="{
         'background-color': mainTypeColor(mainType, 'dark'),
-        'background-image': 'url(assets/svg/pokeball_simple.svg)',
+        'background-image': 'url(' + getTypeIconUrl(mainType) + ')',
         'background-repeat': 'no-repeat',
         'background-position': 'center',
-        'background-size': 'cover'
+        'background-size': '90%',
       }"
     >
-
-      <ion-icon name="heart-outline" class="heart-icon"></ion-icon>
+    
+      <img src="../../../assets/svg/Property 1=Default.svg" alt="heart" class="heart-icon"/>
 
       <img [src]="imageUrl" [alt]="name" *ngIf="imageUrl; else fallback" class="pokemon-img" />
       <ng-template #fallback>

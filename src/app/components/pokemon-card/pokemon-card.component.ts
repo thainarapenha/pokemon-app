@@ -47,4 +47,8 @@ export class PokemonCardComponent {
     const tipo = type?.toLowerCase();
     return colors[tipo]?.[variant] || '#f8f8f8';
   }
+
+  getTypeIconUrl(type: string): string {
+    return `https://raw.githubusercontent.com/duiker101/pokemon-type-svg-icons/master/icons/${type.toLowerCase()}.svg`;
+  }
 }

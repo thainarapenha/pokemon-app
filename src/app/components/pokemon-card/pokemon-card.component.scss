@@ -20,13 +20,15 @@
 
 .pokemon-id {
   font-size: 14px;
-  color: #666;
+  color: #000;
+  font-weight: 600;
 }
 
 .pokemon-name {
   font-size: 20px;
   font-weight: bold;
   margin-bottom: 4px;
+  color: #000;
 }
 
 .pokemon-types {
@@ -49,7 +51,7 @@
 }
 
 .pokemon-img {
-  width: 100%;
+  width: 60%;
   height: auto;
   max-height: 100%;
   object-fit: contain;
@@ -64,4 +66,20 @@
   z-index: 3;
   cursor: pointer;
   transition: transform 0.2s ease;
+}
+
+.type-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+}
+
+.type-icon {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
 }
