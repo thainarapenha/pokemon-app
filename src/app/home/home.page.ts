@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonSearchbar, IonList, IonItem, IonLabel } from '@ionic/angular/standalone';
 import { PokemonService } from '../services/http.service';
 import { PokemonCardComponent } from '../components/pokemon-card/pokemon-card.component';
 import { CommonModule } from '@angular/common';
@@ -9,12 +9,22 @@ import { CommonModule } from '@angular/common';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: true,
-  imports: [CommonModule, IonHeader, IonToolbar, IonTitle, IonContent, PokemonCardComponent],
+  imports: [CommonModule,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonContent,
+    PokemonCardComponent,
+    IonSearchbar,
+    IonList,
+    IonItem,
+    IonLabel
+  ],
 })
-
 
 export class HomePage implements OnInit {
   public pokemons: any[] = [];
+  public filteredPokemons: any[] = [];
   
   constructor(private httpService: PokemonService) {}
 
@@ -25,7 +35,6 @@ export class HomePage implements OnInit {
   getAllPokemons() {
     this.httpService.getAllPokemon().subscribe(async (response: any) => {
       const results = response.results;
-      console.log('results:', results)
 
       const promises = results.map((p: any) =>
         this.httpService.getPokemonName(p.name).toPromise()
@@ -38,6 +47,15 @@ export class HomePage implements OnInit {
         types: pokemon.types.map((t: any) => t.type.name),
         image: pokemon.sprites.other['official-artwork'].front_default
       }));
+      this.filteredPokemons = this.pokemons;
     });
+  }
+
+  handleInput(event: any) {
+    const query = event.target.value.toLowerCase();
+
+    this.filteredPokemons = this.pokemons.filter(pokemon =>
+      pokemon.name.toLowerCase().includes(query)
+    );
   }
 }

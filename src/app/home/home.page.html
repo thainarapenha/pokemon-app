@@ -4,12 +4,19 @@
       Pokedex
     </ion-title>
   </ion-toolbar>
+
+  <ion-toolbar>
+    <ion-searchbar
+      (ionInput)="handleInput($event)"
+      placeholder="Procurar Pókemon"
+    >
+  </ion-searchbar>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-
   <app-pokemon-card
-    *ngFor="let pokemon of pokemons"
+    *ngFor="let pokemon of filteredPokemons"
     [id]="pokemon.id"
     [name]="pokemon.name"
     [types]="pokemon.types"
