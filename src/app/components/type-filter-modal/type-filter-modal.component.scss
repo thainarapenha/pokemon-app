@@ -1,0 +1,34 @@
+.modal-content {
+  --background: #404040;
+  --padding-top: 10px;
+  --padding-bottom: 10px;
+  height: 100%;
+}
+
+.item-modal {
+  background: #404040;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.item-modal span {
+  width: 90%;
+  padding: 4%;
+  background: #000;
+  border-radius: 50px;
+  text-transform: capitalize;
+
+  margin-top: 10px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.button-type {
+  width: 100%;
+  padding: 1% 5%;
+  --background: #fff;
+  background: #404040;
+  --border-radius: 50px;
+  text-transform: capitalize;
+}

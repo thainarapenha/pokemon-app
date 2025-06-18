@@ -1,0 +1,20 @@
+<ion-content class="modal-content">
+  <ion-list class="item-modal">
+    <span
+      color="medium"
+      expand="block"
+      (click)="clearFilter()"
+    >
+      Mostrar todos
+    </span>
+    
+    <ion-button
+      class="button-type"
+      *ngFor="let type of types"
+      expand="block"
+      (click)="selectType(type)"
+    >
+      {{ type }}
+    </ion-button>       
+  </ion-list>
+</ion-content>

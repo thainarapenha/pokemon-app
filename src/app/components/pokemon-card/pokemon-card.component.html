@@ -1,6 +1,5 @@
 <ion-card [ngStyle]="{ 'background-color': mainTypeColor(mainType, 'light') }" class="pokemon-card">
-  <ion-card-content class="card-content">
-    
+  <ion-card-content class="card-content">    
     <div class="pokemon-info">
       <div class="pokemon-id">{{ formattedId }}</div>
       <div class="pokemon-name">{{ name | titlecase }}</div>
@@ -32,7 +31,6 @@
         'background-size': '90%',
       }"
     >
-    
       <img src="../../../assets/svg/Property 1=Default.svg" alt="heart" class="heart-icon"/>
 
       <img [src]="imageUrl" [alt]="name" *ngIf="imageUrl; else fallback" class="pokemon-img" />

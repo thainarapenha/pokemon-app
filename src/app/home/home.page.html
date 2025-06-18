@@ -1,8 +1,6 @@
- <ion-header [translucent]="true">
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Pokedex
-    </ion-title>
+    <ion-title>Pokedex</ion-title>
   </ion-toolbar>
 
   <ion-toolbar>
@@ -10,17 +8,25 @@
       (ionInput)="handleInput($event)"
       placeholder="Procurar Pókemon"
     >
-  </ion-searchbar>
+    </ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="ion-padding" #page>
+  <ion-button
+    class="button-filter-type"
+    expand="block"
+    (click)="openTypeFilterModal()"
+  >
+    Filtrar por Tipo
+  </ion-button>
+
   <app-pokemon-card
     *ngFor="let pokemon of filteredPokemons"
     [id]="pokemon.id"
     [name]="pokemon.name"
     [types]="pokemon.types"
-    [imageUrl]="pokemon.image">
-    >
+    [imageUrl]="pokemon.image"
+  >
   </app-pokemon-card>
 </ion-content>
