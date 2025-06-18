@@ -1,0 +1,35 @@
+<ion-content class="modal-content">
+  <ion-list class="item-modal">    
+    <ion-button
+      class="button-order"
+      expand="block"
+      (click)="clearFilter()"
+    >
+      Menor número
+    </ion-button> 
+
+    <ion-button
+      class="button-order"
+      expand="block"
+      (click)="selectOrder('number-desc')"
+    >
+      Maior número
+    </ion-button>
+
+    <ion-button
+      class="button-order"
+      expand="block"
+      (click)="selectOrder('az')"
+    >
+      A - Z
+    </ion-button>
+
+    <ion-button
+      class="button-order"
+      expand="block"
+      (click)="selectOrder('za')"
+    >
+      Z - A
+    </ion-button>       
+  </ion-list>
+</ion-content>

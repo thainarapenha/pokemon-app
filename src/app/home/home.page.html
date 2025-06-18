@@ -1,20 +1,42 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title>Pokedex</ion-title>
+  </ion-toolbar>
+
+  <ion-toolbar>
+    <ion-searchbar
+      (ionInput)="handleInput($event)"
+      placeholder="Procurar Pókemon"
+    >
+    </ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="ion-padding" #page>  
+  <div class="filter-box">
+    <ion-button
+      class="button-filter-type"
+      expand="block"
+      (click)="openTypeFilterModal()"
+    >
+      Filtrar tipo
+    </ion-button>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <ion-button
+      class="button-filter-type"
+      expand="block"
+      (click)="openOrderFilterModal()"
+    >
+      Filtrar ordem
+    </ion-button>
   </div>
+
+  <app-pokemon-card
+    *ngFor="let pokemon of filteredPokemons"
+    [id]="pokemon.id"
+    [name]="pokemon.name"
+    [types]="pokemon.types"
+    [imageUrl]="pokemon.image"
+  >
+  </app-pokemon-card>
 </ion-content>
