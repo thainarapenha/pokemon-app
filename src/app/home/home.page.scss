@@ -11,5 +11,14 @@ ion-modal {
 }
 
 .button-filter-type{
+  width: 45%;
   --border-radius: 80px;
+  --background: #2c2c2c;
+  --color: #fff;
+}
+
+.filter-box {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 5%;
 }

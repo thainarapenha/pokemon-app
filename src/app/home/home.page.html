@@ -12,14 +12,24 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding" #page>
-  <ion-button
-    class="button-filter-type"
-    expand="block"
-    (click)="openTypeFilterModal()"
-  >
-    Filtrar por Tipo
-  </ion-button>
+<ion-content [fullscreen]="true" class="ion-padding" #page>  
+  <div class="filter-box">
+    <ion-button
+      class="button-filter-type"
+      expand="block"
+      (click)="openTypeFilterModal()"
+    >
+      Filtrar tipo
+    </ion-button>
+
+    <ion-button
+      class="button-filter-type"
+      expand="block"
+      (click)="openOrderFilterModal()"
+    >
+      Filtrar ordem
+    </ion-button>
+  </div>
 
   <app-pokemon-card
     *ngFor="let pokemon of filteredPokemons"

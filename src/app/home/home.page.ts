@@ -4,6 +4,7 @@ import { PokemonCardComponent } from '../components/pokemon-card/pokemon-card.co
 import { CommonModule } from '@angular/common';
 import { ModalController } from '@ionic/angular';
 import { TypeFilterModalComponent } from '../components/type-filter-modal/type-filter-modal.component';
+import { OrderFilterModalComponent } from '../components/order-filter-modal/order-filter-modal.component';
 
 import {
   IonHeader,
@@ -38,7 +39,8 @@ import {
     IonButton,
     IonButtons,
     IonModal,
-    TypeFilterModalComponent
+    TypeFilterModalComponent,
+    OrderFilterModalComponent
   ],
 })
 
@@ -51,6 +53,8 @@ export class HomePage implements OnInit {
 
   public pokemons: any[] = [];
   public filteredPokemons: any[] = [];
+
+  currentOrder: string = 'id-asc';
   
   constructor(
     private httpService: PokemonService,
@@ -59,28 +63,6 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.getAllPokemons();
-  }
-
-  async openTypeFilterModal() {
-    const modal = await this.modalController.create({
-      component: TypeFilterModalComponent,
-      componentProps: {
-        types: this.pokemonTypes
-      },
-      breakpoints: [0, 0.4, 0.6, 1],
-      initialBreakpoint: 0.4,
-      handle: true,
-      showBackdrop: true,
-      backdropDismiss: true
-    });
-
-    await modal.present();
-
-    const { data: selectedType } = await modal.onDidDismiss();
-
-    this.filteredPokemons = selectedType
-      ? this.pokemons.filter(p => p.types.includes(selectedType))
-      : this.pokemons;
   }
 
   getAllPokemons() {
@@ -108,5 +90,63 @@ export class HomePage implements OnInit {
     this.filteredPokemons = this.pokemons.filter(pokemon =>
       pokemon.name.toLowerCase().includes(query)
     );
+  }
+  
+  async openTypeFilterModal() {
+    const modal = await this.modalController.create({
+      component: TypeFilterModalComponent,
+      componentProps: {
+        types: this.pokemonTypes
+      },
+      breakpoints: [0, 0.5, 0.75, 0.8, 1],
+      initialBreakpoint: 0.8,
+      handle: true,
+      showBackdrop: true,
+      backdropDismiss: true
+    });
+
+    await modal.present();
+
+    const { data: selectedType } = await modal.onDidDismiss();
+
+    this.filteredPokemons = selectedType
+      ? this.pokemons.filter(p => p.types.includes(selectedType))
+      : this.pokemons;
+  }
+
+  async openOrderFilterModal() {
+    const modal = await this.modalController.create({
+      component: OrderFilterModalComponent,
+      breakpoints: [0, 0.5, 0.75, 0.8, 1],
+      initialBreakpoint: 0.5,
+      handle: true,
+      backdropDismiss: true,
+      showBackdrop: true
+    });
+
+    await modal.present();
+
+    const { data: selectedOrder } = await modal.onDidDismiss();
+
+    if (selectedOrder) {
+      this.applyOrderFilter(selectedOrder);
+    }
+  }
+
+  applyOrderFilter(order: string) {
+    switch (order) {
+      case 'number-asc':
+        this.filteredPokemons.sort((a, b) => a.id - b.id);
+        break;
+      case 'number-desc':
+        this.filteredPokemons.sort((a, b) => b.id - a.id);
+        break;
+      case 'az':
+        this.filteredPokemons.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      case 'za':
+        this.filteredPokemons.sort((a, b) => b.name.localeCompare(a.name));
+        break;
+    }
   }
 }
