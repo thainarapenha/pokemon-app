@@ -177,3 +177,39 @@
   flex-wrap: wrap;
   gap: 4px;
 }
+
+
+.gender-bar {
+  display: flex;
+  height: 10px;
+  width: 100%;
+  border-radius: 5px;
+  overflow: hidden;
+  margin: 4px 0;
+  background-color: #ddd;
+}
+
+.male {
+  background-color: #4a90e2; // Azul
+  height: 100%;
+}
+
+.female {
+  background-color: #f48fb1; // Rosa
+  height: 100%;
+}
+
+.gender-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  padding-top: 2px;
+}
+
+.label-male {
+  color: #4a90e2;
+}
+
+.label-female {
+  color: #f48fb1;
+}

@@ -58,15 +58,14 @@ export class PokemonDetailPage implements OnInit {
     return entry ? entry.genus : 'Unknown category';
   }
 
-  getGenderText(rate: number): string {
-    if (rate === -1) {
-      return 'No gender';
-    }
+  getMalePercentage(rate: number): number {
+    if (rate === -1) return 0;
+    return Math.round((1 - rate / 8) * 100);
+  }
 
-    const female = (rate / 8) * 100;
-    const male = 100 - female;
-
-    return `♂ ${male.toFixed(0)}% / ♀ ${female.toFixed(0)}%`;
+  getFemalePercentage(rate: number): number {
+    if (rate === -1) return 0;
+    return Math.round((rate / 8) * 100);
   }
 
   loadEvolutions(data: any) {

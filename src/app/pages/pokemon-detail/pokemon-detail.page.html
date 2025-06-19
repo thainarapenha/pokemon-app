@@ -74,7 +74,22 @@
         </div>
       </div>
 
-      <p><strong>Gender:</strong> {{ getGenderText(pokemon.genderRate) }}</p>
+      <p><strong>Gender:</strong></p>
+
+      <ng-container *ngIf="pokemon.genderRate !== -1; else noGender">
+        <div class="gender-bar">
+          <div class="male" [style.width.%]="getMalePercentage(pokemon.genderRate)"></div>
+          <div class="female" [style.width.%]="getFemalePercentage(pokemon.genderRate)"></div>
+        </div>
+        <div class="gender-labels">
+          <span class="label-male">♂ {{ getMalePercentage(pokemon.genderRate) }}%</span>
+          <span class="label-female">♀ {{ getFemalePercentage(pokemon.genderRate) }}%</span>
+        </div>
+      </ng-container>
+
+      <ng-template #noGender>
+        <p>Unknown</p>
+      </ng-template>
     </ion-card-content>
 
     <div class="title-sections">
