@@ -49,17 +49,37 @@
 
   <ion-card class="info-card">
     <ion-card-content>
-      <p >{{ pokemon.description }}</p>
-      <p><strong>Categoria:</strong> {{ pokemon.category }}</p>
-      <p><strong>Altura:</strong> {{ pokemon.height / 10 }} m</p>
-      <p><strong>Peso:</strong> {{ pokemon.weight / 10 }} kg</p>
-      <p><strong>Habilidades:</strong>
-        <span *ngFor="let ability of pokemon.abilities; let last = last">
-          {{ ability.ability.name | titlecase }}<span *ngIf="!last">, </span>
-        </span>
-      </p>
-      <p><strong>Gênero:</strong> {{ getGenderText(pokemon.genderRate) }}</p>
+      <p>{{ pokemon.description }}</p>
+      <div class="desc-info">
+        <div class="desc-info-details">
+          <p><strong>Weight:</strong></p>
+          <span>{{ pokemon.weight / 10 }} kg</span>
+        </div>
+        <div class="desc-info-details">
+          <p><strong>Height:</strong></p>
+          <span>{{ pokemon.height / 10 }} m</span>
+        </div>
+        <div class="desc-info-details">
+          <p><strong>Category:</strong></p>
+          <span>{{ pokemon.category }}</span>
+        </div>
+      </div>
+
+      <div class="desc-info-exception" >
+        <p><strong>Skills:</strong></p>
+        <div class="desc-info-details-exception">
+          <span *ngFor="let ability of pokemon.abilities; let last = last">
+            {{ ability.ability.name | titlecase }}
+          </span>
+        </div>
+      </div>
+
+      <p><strong>Gender:</strong> {{ getGenderText(pokemon.genderRate) }}</p>
     </ion-card-content>
+
+    <div class="title-sections">
+      <span>Evolutions</span>
+    </div>
 
     <ion-card class="evolution-card" *ngFor="let evo of evolutions">
       <ion-card-content class="evo-content">
