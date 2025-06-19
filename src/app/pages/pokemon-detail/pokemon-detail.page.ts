@@ -58,17 +58,17 @@ export class PokemonDetailPage implements OnInit {
 
   extractFlavorText(species: any): string {
     const entry = species.flavor_text_entries.find((e: any) => e.language.name === 'en');
-    return entry ? entry.flavor_text.replace(/\f/g, ' ') : 'Descrição não disponível.';
+    return entry ? entry.flavor_text.replace(/\f/g, ' ') : 'Description not available.';
   }
 
   extractCategory(species: any): string {
-    const entry = species.genera.find((g: any) => g.language.name === 'pt');
-    return entry ? entry.genus : 'Categoria desconhecida';
+    const entry = species.genera.find((g: any) => g.language.name === 'en');
+    return entry ? entry.genus : 'Unknown category';
   }
 
   getGenderText(rate: number): string {
     if (rate === -1) {
-      return 'Sem gênero';
+      return 'No gender';
     }
 
     const female = (rate / 8) * 100;
