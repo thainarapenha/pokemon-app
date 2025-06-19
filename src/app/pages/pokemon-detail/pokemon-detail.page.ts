@@ -70,9 +70,32 @@ export class PokemonDetailPage implements OnInit {
     return `♂ ${male.toFixed(0)}% / ♀ ${female.toFixed(0)}%`;
   }
 
+  loadEvolutions(data: any) {
+    const evolutionNames: string[] = [];
+
+    let evo = data.chain;
+    while (evo) {
+      evolutionNames.push(evo.species.name);
+      evo = evo.evolves_to[0];
+    }
+
+    const requests = evolutionNames.map(name => this.pokemonService.getPokemonName(name).toPromise());
+
+    Promise.all(requests).then(details => {
+      this.evolutions = details.map(pokemon => ({
+        id: pokemon.id,
+        name: pokemon.name,
+        image: pokemon.sprites.other['official-artwork'].front_default,
+        types: pokemon.types.map((t: any) => t.type.name)
+      }));
+    });
+  }
+
   loadPokemon() {
     this.pokemonService.getPokemonName(this.pokemonName).subscribe(pokemonData => {
       this.pokemonService.getPokemonSpecies(pokemonData.id).subscribe(species => {
+        const evolutionChainUrl = (species as any).evolution_chain?.url;
+
         this.pokemon = {
           id: pokemonData.id,
           name: pokemonData.name,
@@ -83,8 +106,15 @@ export class PokemonDetailPage implements OnInit {
           image: pokemonData.sprites.other['official-artwork'].front_default,
           description: this.extractFlavorText(species),
           category: this.extractCategory(species),
-          genderRate: (species as any).gender_rate
+          genderRate: (species as any).gender_rate,
+          evolutionChainUrl,
         };
+
+        if (evolutionChainUrl) {
+          this.pokemonService.getEvolutionChainByUrl(evolutionChainUrl).subscribe(evolutionData => {
+            this.loadEvolutions(evolutionData);
+          });
+        }
       });
     });
   }

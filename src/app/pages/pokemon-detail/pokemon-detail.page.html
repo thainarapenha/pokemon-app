@@ -49,5 +49,31 @@
       </p>
       <p><strong>Gênero:</strong> {{ getGenderText(pokemon.genderRate) }}</p>
     </ion-card-content>
+
+    <ion-card class="evolution-card" *ngFor="let evo of evolutions">
+      <ion-card-content class="evo-content">
+        <img [src]="evo.image" class="evo-image" [alt]="evo.name" />
+
+        <div class="evo-info">
+          <div class="evo-id">#{{ evo.id | number: '3.0' }}</div>
+          <div class="evo-name">{{ evo.name | titlecase }}</div>
+
+          <div class="evo-types">
+            <ion-badge
+              *ngFor="let type of evo.types"
+              class="type-badge"
+              [ngStyle]="{ 'background-color': mainTypeColor(type, 'dark') }"
+            >
+              <img
+                [src]="getTypeIconUrl(type)"
+                class="type-icon"
+                [alt]="type"
+              />
+              {{ type | titlecase }}
+            </ion-badge>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
   </ion-card>
 </ion-content>

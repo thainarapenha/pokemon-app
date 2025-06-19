@@ -42,3 +42,42 @@
   border-radius: 0;
   box-shadow: none;
 }
+
+.evolution-card {
+  display: flex;
+  margin-bottom: 16px;
+}
+
+.evo-content {
+  display: flex;
+  align-items: center;
+}
+
+.evo-image {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin-right: 16px;
+}
+
+.evo-info {
+  flex: 1;
+}
+
+.evo-id {
+  font-weight: bold;
+  font-size: 14px;
+  color: #888;
+}
+
+.evo-name {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 4px 0;
+}
+
+.evo-types {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}

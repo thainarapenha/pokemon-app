@@ -22,4 +22,7 @@ export class PokemonService {
         return this.http.get(`${this.apiURL}pokemon-species/${name}`);
     }
 
+    getEvolutionChainByUrl(url: string) {
+        return this.http.get(url);
+    }
 }
