@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
 import { ModalController } from '@ionic/angular';
 import { TypeFilterModalComponent } from '../../components/type-filter-modal/type-filter-modal.component';
 import { OrderFilterModalComponent } from '../../components/order-filter-modal/order-filter-modal.component';
-import { PokemonDetailPage } from '../pokemon-detail/pokemon-detail.page';
 
 import {
   IonHeader,
@@ -13,12 +12,7 @@ import {
   IonTitle,
   IonContent,
   IonSearchbar,
-  IonList,
-  IonItem,
-  IonLabel,
-  IonButton,
-  IonButtons,
-  IonModal
+  IonButton
 } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 
@@ -35,15 +29,7 @@ import { Router } from '@angular/router';
     IonContent,
     PokemonCardComponent,
     IonSearchbar,
-    IonList,
-    IonItem,
-    IonLabel,
-    IonButton,
-    IonButtons,
-    IonModal,
-    TypeFilterModalComponent,
-    OrderFilterModalComponent,
-    PokemonDetailPage
+    IonButton
   ],
 })
 

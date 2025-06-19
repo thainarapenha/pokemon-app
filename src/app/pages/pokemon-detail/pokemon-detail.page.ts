@@ -4,11 +4,7 @@ import { PokemonService } from '../../services/http.service';
 import { CommonModule, Location } from '@angular/common';
 
 import {
-  IonHeader,
-  IonToolbar,
   IonButtons,
-  IonBackButton,
-  IonTitle,
   IonContent,
   IonBadge,
   IonCard,
@@ -23,11 +19,7 @@ import {
   standalone: true,
   imports: [
     CommonModule,
-    IonHeader,
-    IonToolbar,
     IonButtons,
-    IonBackButton,
-    IonTitle,
     IonContent,
     IonBadge,
     IonCard,
