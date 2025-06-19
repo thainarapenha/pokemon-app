@@ -1,16 +1,58 @@
 .detail-header {
   text-align: center;
-  padding: 2rem 0;
+  padding: 5rem 0 3rem 0;
   border-radius: 0 0 200px 200PX;
+  height: 230px;
 }
 
 .detail-image {
-  max-width: 250px;
-  height: auto;
+  position: absolute;
+  transform: translateX(-50%);
+  min-width: 200px;
+  height: 200px;
+  z-index: 10;
+}
+
+.back-button {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  font-size: 24px;
+  color: white;
+  z-index: 3;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+
+  span {
+    font-size: 16px;
+  }
+}
+
+.heart-icon {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 20px;
+  color: white;
+  z-index: 3;
+  cursor: pointer;
+  transition: transform 0.2s ease;
 }
 
 .pokemon-id {
-  padding: 0 1rem;
+  padding: 4rem 1rem 0 1rem;
+  display: flex;
+  flex-direction: column;
+
+  span {
+    font-size: 32px;
+    font-weight: 600;
+    height: 28px;
+  }
+
+  p {
+    font-size: 14px;
+  }
 }
 
 .pokemon-types {

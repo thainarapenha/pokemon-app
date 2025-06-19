@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PokemonService } from '../../services/http.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 
 import {
   IonHeader,
@@ -13,6 +13,7 @@ import {
   IonBadge,
   IonCard,
   IonCardContent,
+  IonIcon
 } from '@ionic/angular/standalone';
 
 @Component({
@@ -30,7 +31,8 @@ import {
     IonContent,
     IonBadge,
     IonCard,
-    IonCardContent
+    IonCardContent,
+    IonIcon
   ]
 })
 export class PokemonDetailPage implements OnInit {
@@ -42,6 +44,7 @@ export class PokemonDetailPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private pokemonService: PokemonService,
+    private location: Location
   ) {}
 
   ngOnInit() {
@@ -49,8 +52,12 @@ export class PokemonDetailPage implements OnInit {
     this.loadPokemon();
   }
 
+  goBack() {
+    this.location.back();
+  }
+
   extractFlavorText(species: any): string {
-    const entry = species.flavor_text_entries.find((e: any) => e.language.name === 'pt');
+    const entry = species.flavor_text_entries.find((e: any) => e.language.name === 'en');
     return entry ? entry.flavor_text.replace(/\f/g, ' ') : 'Descrição não disponível.';
   }
 

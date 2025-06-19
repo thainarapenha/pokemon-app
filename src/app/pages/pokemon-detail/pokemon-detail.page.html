@@ -1,17 +1,25 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/"></ion-back-button>
-    </ion-buttons>
-    <ion-title>{{ pokemon?.name | titlecase }}</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content *ngIf="pokemon">
-  <div
+  <div 
     class="detail-header"
-    [ngStyle]="{'background-color': mainTypeColor(mainType, 'dark')}"
+    [ngStyle]="{
+      'background-color': mainTypeColor(mainType, 'dark'),
+      'background-image': 'url(' + getTypeIconUrl(mainType) + ')',
+      'background-repeat': 'no-repeat',
+      'background-position': 'center',
+      'background-size': '50%',
+    }"
   >
+    <ion-buttons
+      fill="clear"
+      class="back-button"
+      (click)="goBack()"
+    >
+      <ion-icon name="chevron-back-outline"></ion-icon>
+      <span>Back</span>
+    </ion-buttons>
+
+    <img src="../../../assets/svg/Property 1=Default.svg" alt="heart" class="heart-icon"/>
+
     <img
       class="detail-image"
       [src]="pokemon.image"
@@ -19,7 +27,10 @@
     />
   </div>
 
-  <h2 class="pokemon-id">Nº{{ pokemon.id | number:'3.0' }}</h2>
+  <div class="pokemon-id">
+    <span>{{ pokemon?.name | titlecase }}</span>
+    <p >Nº{{ pokemon.id | number:'3.0' }}</p>
+  </div>
 
   <div class="pokemon-types"> 
     <ion-badge
