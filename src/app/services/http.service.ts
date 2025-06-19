@@ -1,6 +1,5 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-// import { IPokemon } from "../models/pokemon";
 import { Observable } from "rxjs";
 
 @Injectable({
@@ -17,5 +16,13 @@ export class PokemonService {
 
     getPokemonName(name: string): Observable<any> {
         return this.http.get(`${this.apiURL}pokemon/${name}`);
+    }
+
+    getPokemonSpecies(name: string) {
+        return this.http.get(`${this.apiURL}pokemon-species/${name}`);
+    }
+
+    getEvolutionChainByUrl(url: string) {
+        return this.http.get(url);
     }
 }

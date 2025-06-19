@@ -1,0 +1,125 @@
+<ion-content *ngIf="pokemon">
+  <div 
+    class="detail-header"
+    [ngStyle]="{
+      'background-color': mainTypeColor(mainType, 'dark'),
+      'background-image': 'url(' + getTypeIconUrl(mainType) + ')',
+      'background-repeat': 'no-repeat',
+      'background-position': 'center',
+      'background-size': '50%',
+    }"
+  >
+    <ion-buttons
+      fill="clear"
+      class="back-button"
+      (click)="goBack()"
+    >
+      <ion-icon name="chevron-back-outline"></ion-icon>
+      <span>Back</span>
+    </ion-buttons>
+
+    <img src="../../../assets/svg/Property 1=Default.svg" alt="heart" class="heart-icon"/>
+
+    <img
+      class="detail-image"
+      [src]="pokemon.image"
+      [alt]="pokemon.name"
+    />
+  </div>
+
+  <div class="pokemon-id">
+    <span>{{ pokemon?.name | titlecase }}</span>
+    <p >Nº{{ pokemon.id | number:'3.0' }}</p>
+  </div>
+
+  <div class="pokemon-types"> 
+    <ion-badge
+      *ngFor="let type of pokemon.types"
+      class="type-badge"
+      [ngStyle]="{ 'background-color': mainTypeColor(type, 'dark')}"
+    >
+      <img
+        [src]="getTypeIconUrl(type)"
+        alt="{{ type }}"
+        class="type-icon"
+      />
+      {{ type | titlecase }}
+    </ion-badge>
+  </div>
+
+  <ion-card class="info-card">
+    <ion-card-content>
+      <p>{{ pokemon.description }}</p>
+      <div class="desc-info">
+        <div class="desc-info-details">
+          <p><strong>Weight:</strong></p>
+          <span>{{ pokemon.weight / 10 }} kg</span>
+        </div>
+        <div class="desc-info-details">
+          <p><strong>Height:</strong></p>
+          <span>{{ pokemon.height / 10 }} m</span>
+        </div>
+        <div class="desc-info-details">
+          <p><strong>Category:</strong></p>
+          <span>{{ pokemon.category }}</span>
+        </div>
+      </div>
+
+      <div class="desc-info-exception" >
+        <p><strong>Skills:</strong></p>
+        <div class="desc-info-details-exception">
+          <span *ngFor="let ability of pokemon.abilities; let last = last">
+            {{ ability.ability.name | titlecase }}
+          </span>
+        </div>
+      </div>
+
+      <p><strong>Gender:</strong></p>
+
+      <ng-container *ngIf="pokemon.genderRate !== -1; else noGender">
+        <div class="gender-bar">
+          <div class="male" [style.width.%]="getMalePercentage(pokemon.genderRate)"></div>
+          <div class="female" [style.width.%]="getFemalePercentage(pokemon.genderRate)"></div>
+        </div>
+        <div class="gender-labels">
+          <span class="label-male">♂ {{ getMalePercentage(pokemon.genderRate) }}%</span>
+          <span class="label-female">♀ {{ getFemalePercentage(pokemon.genderRate) }}%</span>
+        </div>
+      </ng-container>
+
+      <ng-template #noGender>
+        <p>Unknown</p>
+      </ng-template>
+    </ion-card-content>
+
+    <div class="title-sections">
+      <span>Evolutions</span>
+    </div>
+
+    <ion-card class="evolution-card" *ngFor="let evo of evolutions">
+      <ion-card-content class="evo-content">
+        <img [src]="evo.image" class="evo-image" [alt]="evo.name" />
+
+        <div class="evo-info">
+          <div class="evo-id">#{{ evo.id | number: '3.0' }}</div>
+          <div class="evo-name">{{ evo.name | titlecase }}</div>
+
+          <div class="evo-types">
+            <ion-badge
+              *ngFor="let type of evo.types"
+              class="type-badge"
+              [ngStyle]="{ 'background-color': mainTypeColor(type, 'dark') }"
+            >
+              <img
+                [src]="getTypeIconUrl(type)"
+                class="type-icon"
+                [alt]="type"
+              />
+              {{ type | titlecase }}
+            </ion-badge>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </ion-card>
+</ion-content>
