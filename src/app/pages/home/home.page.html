@@ -37,6 +37,7 @@
     [name]="pokemon.name"
     [types]="pokemon.types"
     [imageUrl]="pokemon.image"
+    (click)="goToDetail(pokemon.name)"
   >
   </app-pokemon-card>
 </ion-content>

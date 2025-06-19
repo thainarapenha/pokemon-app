@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { PokemonService } from '../services/http.service';
-import { PokemonCardComponent } from '../components/pokemon-card/pokemon-card.component';
+import { PokemonService } from '../../services/http.service';
+import { PokemonCardComponent } from '../../components/pokemon-card/pokemon-card.component';
 import { CommonModule } from '@angular/common';
 import { ModalController } from '@ionic/angular';
-import { TypeFilterModalComponent } from '../components/type-filter-modal/type-filter-modal.component';
-import { OrderFilterModalComponent } from '../components/order-filter-modal/order-filter-modal.component';
+import { TypeFilterModalComponent } from '../../components/type-filter-modal/type-filter-modal.component';
+import { OrderFilterModalComponent } from '../../components/order-filter-modal/order-filter-modal.component';
+import { PokemonDetailPage } from '../pokemon-detail/pokemon-detail.page';
 
 import {
   IonHeader,
@@ -19,6 +20,7 @@ import {
   IonButtons,
   IonModal
 } from '@ionic/angular/standalone';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -40,7 +42,8 @@ import {
     IonButtons,
     IonModal,
     TypeFilterModalComponent,
-    OrderFilterModalComponent
+    OrderFilterModalComponent,
+    PokemonDetailPage
   ],
 })
 
@@ -58,11 +61,16 @@ export class HomePage implements OnInit {
   
   constructor(
     private httpService: PokemonService,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private router: Router
   ) {}
 
   ngOnInit() {
     this.getAllPokemons();
+  }
+
+  goToDetail(pokemonId: number) {
+    this.router.navigate([`/pokemon`, pokemonId]);
   }
 
   getAllPokemons() {

@@ -1,0 +1,53 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ pokemon?.name | titlecase }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="pokemon">
+  <div
+    class="detail-header"
+    [ngStyle]="{'background-color': mainTypeColor(mainType, 'dark')}"
+  >
+    <img
+      class="detail-image"
+      [src]="pokemon.image"
+      [alt]="pokemon.name"
+    />
+  </div>
+
+  <h2 class="pokemon-id">Nº{{ pokemon.id | number:'3.0' }}</h2>
+
+  <div class="pokemon-types"> 
+    <ion-badge
+      *ngFor="let type of pokemon.types"
+      class="type-badge"
+      [ngStyle]="{ 'background-color': mainTypeColor(type, 'dark')}"
+    >
+      <img
+        [src]="getTypeIconUrl(type)"
+        alt="{{ type }}"
+        class="type-icon"
+      />
+      {{ type | titlecase }}
+    </ion-badge>
+  </div>
+
+  <ion-card class="info-card">
+    <ion-card-content>
+      <p >{{ pokemon.description }}</p>
+      <p><strong>Categoria:</strong> {{ pokemon.category }}</p>
+      <p><strong>Altura:</strong> {{ pokemon.height / 10 }} m</p>
+      <p><strong>Peso:</strong> {{ pokemon.weight / 10 }} kg</p>
+      <p><strong>Habilidades:</strong>
+        <span *ngFor="let ability of pokemon.abilities; let last = last">
+          {{ ability.ability.name | titlecase }}<span *ngIf="!last">, </span>
+        </span>
+      </p>
+      <p><strong>Gênero:</strong> {{ getGenderText(pokemon.genderRate) }}</p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
