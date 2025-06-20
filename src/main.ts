@@ -7,7 +7,7 @@ import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
 
 import { addIcons } from 'ionicons';
-import { heartOutline, chevronBackOutline } from 'ionicons/icons';
+import { heartOutline, chevronBackOutline, homeOutline } from 'ionicons/icons';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -19,6 +19,7 @@ bootstrapApplication(AppComponent, {
 });
 
 addIcons({
+  'home-outline': homeOutline,
   'heart-outline': heartOutline,
   'chevron-back-outline': chevronBackOutline
 });
