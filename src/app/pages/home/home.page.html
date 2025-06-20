@@ -37,10 +37,9 @@
     [name]="pokemon.name"
     [types]="pokemon.types"
     [imageUrl]="pokemon.image"
+    [isFavorite]="isFavorite(pokemon.name)"
+    (toggleFavorite)="toggleFavorite($event)"
     (click)="goToDetail(pokemon.name)"
   >
   </app-pokemon-card>
-
-  <!-- [isFavorite]="isFavorite(pokemon.id)"
-    (toggleFavorite)="toggleFavorite(pokemon.id)" -->
 </ion-content>

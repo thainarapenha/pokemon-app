@@ -17,20 +17,19 @@ export class PokemonCardComponent {
   @Input() name!: string;
   @Input() types!: string[];
   @Input() imageUrl!: string;
-
   @Input() isFavorite: boolean = false;
-  @Output() toggleFavorite = new EventEmitter<number>();
+  @Output() toggleFavorite = new EventEmitter<string>();
   @Output() cardClick = new EventEmitter<void>();
 
   constructor(private pokemonService: PokemonService) {}
 
   ngOnInit() {
-    this.isFavorite = this.pokemonService.isFavorite(this.name);
+    this.isFavorite = this.pokemonService.isFavoriteByName(this.name);
   }
 
   onToggleFavorite(event: Event): void {
     event.stopPropagation();
-    this.toggleFavorite.emit(this.id);
+    this.toggleFavorite.emit(this.name);
   }
 
   onCardClick() {

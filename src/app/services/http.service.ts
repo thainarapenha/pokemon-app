@@ -28,8 +28,6 @@ export class PokemonService {
     return this.http.get(url);
   }
 
-  // ------------------------------------------------------------------
-
   getFavoritePokemons(): string[] {
     const stored = localStorage.getItem(this.favoritesKey);
     return stored ? JSON.parse(stored) : [];
@@ -48,23 +46,21 @@ export class PokemonService {
     localStorage.setItem(this.favoritesKey, JSON.stringify(favorites));
   }
 
-  isFavorite(pokemonName: string): boolean {
-    return this.getFavoritePokemons().includes(pokemonName);
+  isFavoriteByName(name: string): boolean {
+    const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+    return favorites.includes(name);
   }
 
-  toggleFavoriteByName(name: string) {
+  toggleFavoriteByName(name: string): void {
     const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
     const index = favorites.indexOf(name);
-    if (index > -1) {
+
+    if (index >= 0) {
       favorites.splice(index, 1);
     } else {
       favorites.push(name);
     }
-    localStorage.setItem('favorites', JSON.stringify(favorites));
-  }
 
-  isFavoriteByName(name: string): boolean {
-    const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-    return favorites.includes(name);
+    localStorage.setItem('favorites', JSON.stringify(favorites));
   }
 }

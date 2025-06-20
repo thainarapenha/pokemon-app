@@ -53,6 +53,14 @@ export class HomePage implements OnInit {
     this.getAllPokemons();
   }
 
+  isFavorite(name: string): boolean {
+    return this.httpService.isFavoriteByName(name);
+  }
+
+  toggleFavorite(name: string): void {
+    this.httpService.toggleFavoriteByName(name);
+  }
+
   goToDetail(pokemonName: string) {
     this.router.navigate([`tab-bar/pokemon`, pokemonName]);
   }

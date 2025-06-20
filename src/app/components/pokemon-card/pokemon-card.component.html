@@ -24,16 +24,16 @@ class="pokemon-card"
         'background-repeat': 'no-repeat',
         'background-position': 'center',
         'background-size': '90%',
-      }">
+      }"
+    >
 
-      <ion-icon
-        [name]="isFavorite ? 'heart' : 'heart-outline'"
-        (click)="onToggleFavorite($event)"
-        class="heart-icon"
-      >
-      </ion-icon>
-
-      <!-- <img src="../../../assets/svg/Property 1=Default.svg" alt="heart" class="heart-icon"/> -->
+      <div class="heart-container" (click)="onToggleFavorite($event)">
+        <ion-icon
+          [name]="isFavorite ? 'heart' : 'heart-outline'"
+          class="heart-icon"
+          [ngClass]="{ 'favorite': isFavorite }"
+        ></ion-icon>
+      </div>
 
       <img [src]="imageUrl" [alt]="name" *ngIf="imageUrl; else fallback" class="pokemon-img" />
       <ng-template #fallback>
