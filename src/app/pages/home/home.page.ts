@@ -34,7 +34,6 @@ import {
 })
 
 export class HomePage implements OnInit {
-  
   pokemonTypes: string[] = [
     'fire', 'water', 'grass', 'electric', 'psychic',
     'rock', 'ground', 'bug', 'flying', 'poison'
@@ -42,7 +41,6 @@ export class HomePage implements OnInit {
 
   public pokemons: any[] = [];
   public filteredPokemons: any[] = [];
-
   currentOrder: string = 'id-asc';
   
   constructor(

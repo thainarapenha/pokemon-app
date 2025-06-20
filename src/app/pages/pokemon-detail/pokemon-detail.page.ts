@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PokemonService } from '../../services/http.service';
 import { CommonModule, Location } from '@angular/common';
-
 import {
   IonButtons,
   IonContent,
@@ -28,10 +27,10 @@ import {
   ]
 })
 export class PokemonDetailPage implements OnInit {
-  
   pokemonName!: string;
   pokemon: any;
   evolutions: any[] = [];
+  isFavorite: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -42,6 +41,13 @@ export class PokemonDetailPage implements OnInit {
   ngOnInit() {
     this.pokemonName = this.route.snapshot.paramMap.get('name')!;
     this.loadPokemon();
+    this.isFavorite = this.pokemonService.isFavoriteByName(this.pokemonName);
+  }
+
+  onToggleFavorite(event: Event) {
+    event.stopPropagation();
+    this.pokemonService.toggleFavoriteByName(this.pokemonName);
+    this.isFavorite = this.pokemonService.isFavoriteByName(this.pokemonName);
   }
 
   goBack() {

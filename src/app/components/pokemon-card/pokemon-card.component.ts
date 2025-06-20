@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { PokemonService } from 'src/app/services/http.service';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 
@@ -6,7 +7,10 @@ import { IonicModule } from '@ionic/angular';
   selector: 'app-pokemon-card',
   templateUrl: './pokemon-card.component.html',
   styleUrls: ['./pokemon-card.component.scss'],
-  imports: [CommonModule, IonicModule],
+  imports: [
+    CommonModule,
+    IonicModule,
+  ],
 })
 export class PokemonCardComponent {
   @Input() id!: number;
@@ -14,6 +18,25 @@ export class PokemonCardComponent {
   @Input() types!: string[];
   @Input() imageUrl!: string;
 
+  @Input() isFavorite: boolean = false;
+  @Output() toggleFavorite = new EventEmitter<number>();
+  @Output() cardClick = new EventEmitter<void>();
+
+  constructor(private pokemonService: PokemonService) {}
+
+  ngOnInit() {
+    this.isFavorite = this.pokemonService.isFavorite(this.name);
+  }
+
+  onToggleFavorite(event: Event): void {
+    event.stopPropagation();
+    this.toggleFavorite.emit(this.id);
+  }
+
+  onCardClick() {
+    this.cardClick.emit();
+  }
+  
   get formattedId(): string {
     const idStr = (this.id ?? 0).toString().padStart(3, '0');
     return `Nº${idStr}`;
@@ -24,10 +47,10 @@ export class PokemonCardComponent {
   }
 
   mainTypeColor(type: string, variant: 'light' | 'dark' = 'dark'): string {
-  const colors: any = {
+    const colors: any = {
       grass: { light: '#EDF6EC', dark: '#48D0B0' },
       poison: { light: '#F5EDF8', dark: '#A040A0' },
-      fire: { light: '#FCF3EB', dark: '#FF6F61' }, 
+      fire: { light: '#FCF3EB', dark: '#FF6F61' },
       water: { light: '#EBF1F8', dark: '#6890F0' },
       bug: { light: '#F1F6E8', dark: '#A8B820' },
       normal: { light: '#F1F2F3', dark: '#A8A878' },
