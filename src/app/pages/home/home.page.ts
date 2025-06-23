@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { PokemonService } from '../../services/http.service';
-import { PokemonCardComponent } from '../../components/pokemon-card/pokemon-card.component';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ModalController } from '@ionic/angular';
+import { PokemonService } from '../../services/http.service';
+import { PokemonCardComponent } from '../../components/pokemon-card/pokemon-card.component';
 import { TypeFilterModalComponent } from '../../components/type-filter-modal/type-filter-modal.component';
 import { OrderFilterModalComponent } from '../../components/order-filter-modal/order-filter-modal.component';
 
@@ -14,7 +15,6 @@ import {
   IonSearchbar,
   IonButton
 } from '@ionic/angular/standalone';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -34,7 +34,6 @@ import { Router } from '@angular/router';
 })
 
 export class HomePage implements OnInit {
-  
   pokemonTypes: string[] = [
     'fire', 'water', 'grass', 'electric', 'psychic',
     'rock', 'ground', 'bug', 'flying', 'poison'
@@ -42,7 +41,6 @@ export class HomePage implements OnInit {
 
   public pokemons: any[] = [];
   public filteredPokemons: any[] = [];
-
   currentOrder: string = 'id-asc';
   
   constructor(
@@ -55,8 +53,16 @@ export class HomePage implements OnInit {
     this.getAllPokemons();
   }
 
-  goToDetail(pokemonId: number) {
-    this.router.navigate([`/pokemon`, pokemonId]);
+  isFavorite(name: string): boolean {
+    return this.httpService.isFavoriteByName(name);
+  }
+
+  toggleFavorite(name: string): void {
+    this.httpService.toggleFavoriteByName(name);
+  }
+
+  goToDetail(pokemonName: string) {
+    this.router.navigate([`tab-bar/pokemon`, pokemonName]);
   }
 
   getAllPokemons() {

@@ -15,7 +15,7 @@
 
 .back-button {
   position: absolute;
-  top: 1rem;
+  top: 1.5rem;
   left: 1rem;
   font-size: 24px;
   color: white;
@@ -29,6 +29,8 @@
 }
 
 .heart-icon {
+  width: 30px;
+  height: 30px;
   position: absolute;
   top: 1rem;
   right: 1rem;
@@ -190,12 +192,12 @@
 }
 
 .male {
-  background-color: #4a90e2; // Azul
+  background-color: #4a90e2;
   height: 100%;
 }
 
 .female {
-  background-color: #f48fb1; // Rosa
+  background-color: #f48fb1;
   height: 100%;
 }
 

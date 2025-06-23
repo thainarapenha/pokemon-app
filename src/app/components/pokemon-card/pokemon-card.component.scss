@@ -57,15 +57,33 @@
   object-fit: contain;
 }
 
-.heart-icon {
+.heart-container {
   position: absolute;
-  top: 8px;
-  right: 8px;
-  font-size: 20px;
-  color: white;
-  z-index: 3;
+  top: 10px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
+  background: #d9d9d9;
+  backdrop-filter: blur(6px);
+  border: 2px solid #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
   cursor: pointer;
-  transition: transform 0.2s ease;
+}
+
+.heart-icon {
+  font-size: 24px;
+
+  &.favorite {
+    color: #ff0000;
+  }
+
+  &:not(.favorite) {
+    color: #fff;
+  }
 }
 
 .type-badge {

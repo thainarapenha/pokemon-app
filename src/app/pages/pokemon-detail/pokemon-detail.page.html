@@ -18,8 +18,13 @@
       <span>Back</span>
     </ion-buttons>
 
-    <img src="../../../assets/svg/Property 1=Default.svg" alt="heart" class="heart-icon"/>
-
+    <ion-icon
+      [name]="isFavorite ? 'heart' : 'heart-outline'"
+      (click)="onToggleFavorite($event)"
+      class="heart-icon"
+    >
+    </ion-icon>
+    
     <img
       class="detail-image"
       [src]="pokemon.image"

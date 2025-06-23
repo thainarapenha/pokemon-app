@@ -1,29 +1,24 @@
-<ion-card [ngStyle]="{ 'background-color': mainTypeColor(mainType, 'light') }" class="pokemon-card">
-  <ion-card-content class="card-content">    
+<ion-card
+class="pokemon-card"
+(click)="onCardClick()"
+[ngStyle]="{ 'background-color': mainTypeColor(mainType, 'light') }"
+>
+  <ion-card-content class="card-content">
     <div class="pokemon-info">
       <div class="pokemon-id">{{ formattedId }}</div>
       <div class="pokemon-name">{{ name | titlecase }}</div>
       <div class="pokemon-types">
-        
-        <ion-badge
-        *ngFor="let type of types"
-        class="type-badge"
-        [ngStyle]="{ 'background-color': mainTypeColor(type, 'dark')}"
-        >
-          <img
-            [src]="getTypeIconUrl(type)"
-            alt="{{ type }}"
-            class="type-icon"
-          />
+
+        <ion-badge *ngFor="let type of types" class="type-badge"
+          [ngStyle]="{ 'background-color': mainTypeColor(type, 'dark')}">
+          <img [src]="getTypeIconUrl(type)" alt="{{ type }}" class="type-icon" />
           {{ type | titlecase }}
-          
+
         </ion-badge>
       </div>
     </div>
 
-    <div 
-      class="pokemon-image-box"
-      [ngStyle]="{
+    <div class="pokemon-image-box" [ngStyle]="{
         'background-color': mainTypeColor(mainType, 'dark'),
         'background-image': 'url(' + getTypeIconUrl(mainType) + ')',
         'background-repeat': 'no-repeat',
@@ -31,7 +26,14 @@
         'background-size': '90%',
       }"
     >
-      <img src="../../../assets/svg/Property 1=Default.svg" alt="heart" class="heart-icon"/>
+
+      <div class="heart-container" (click)="onToggleFavorite($event)">
+        <ion-icon
+          [name]="isFavorite ? 'heart' : 'heart-outline'"
+          class="heart-icon"
+          [ngClass]="{ 'favorite': isFavorite }"
+        ></ion-icon>
+      </div>
 
       <img [src]="imageUrl" [alt]="name" *ngIf="imageUrl; else fallback" class="pokemon-img" />
       <ng-template #fallback>

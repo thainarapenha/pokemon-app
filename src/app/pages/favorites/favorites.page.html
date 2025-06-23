@@ -1,0 +1,20 @@
+<ion-content>
+  <div *ngIf="favoritePokemons.length > 0; else noFavorites">
+    <app-pokemon-card
+      *ngFor="let pokemon of favoritePokemons"
+      [id]="pokemon.id"
+      [name]="pokemon.name"
+      [types]="pokemon.simpleTypes"
+      [imageUrl]="pokemon.sprites.other['official-artwork'].front_default"
+      [isFavorite]="isFavorite(pokemon.name)"
+      (toggleFavorite)="toggleFavorite(pokemon.name)"
+      (cardClick)="goToDetail(pokemon.name)"
+    ></app-pokemon-card>
+  </div>
+
+  <ng-template #noFavorites>
+    <div class="empty-state">
+      <p>Nenhum Pokémon foi favoritado ainda</p>
+    </div>
+  </ng-template>
+</ion-content>
