@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, firstValueFrom } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +33,14 @@ export class PokemonService {
     return stored ? JSON.parse(stored) : [];
   }
 
+  async getFavoritePokemonDetails(): Promise<any[]> {
+    const names = this.getFavoritePokemons();
+    const requests = names.map(name =>
+      firstValueFrom(this.getPokemonName(name))
+    );
+    return Promise.all(requests);
+  }
+
   addFavorite(pokemonName: string): void {
     const favorites = this.getFavoritePokemons();
     if (!favorites.includes(pokemonName)) {
@@ -47,12 +55,12 @@ export class PokemonService {
   }
 
   isFavoriteByName(name: string): boolean {
-    const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+    const favorites = this.getFavoritePokemons();
     return favorites.includes(name);
   }
 
   toggleFavoriteByName(name: string): void {
-    const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+    const favorites = this.getFavoritePokemons();
     const index = favorites.indexOf(name);
 
     if (index >= 0) {
@@ -61,6 +69,6 @@ export class PokemonService {
       favorites.push(name);
     }
 
-    localStorage.setItem('favorites', JSON.stringify(favorites));
+    localStorage.setItem(this.favoritesKey, JSON.stringify(favorites));
   }
 }
